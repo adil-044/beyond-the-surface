@@ -3,6 +3,7 @@ import { SceneProvider } from './context/SceneContext';
 import { Navigation } from './components/Navigation';
 import { CustomCursor } from './components/CustomCursor';
 import { LoadingScreen } from './components/UIComponents';
+import { SceneMount } from './components/SceneMount';
 import { HeroScene } from './scenes/HeroScene';
 import { MaterialLabScene } from './scenes/MaterialLabScene';
 import { TransformationScene } from './scenes/TransformationScene';
@@ -40,24 +41,40 @@ function AppContent() {
       {!loading && (
         <>
           <section id="hero" className="relative min-h-screen">
-            <HeroScene />
+            <SceneMount immediate>
+              <HeroScene />
+            </SceneMount>
           </section>
           <section id="materials" className="relative min-h-screen">
-            <MaterialLabScene />
+            <SceneMount>
+              <MaterialLabScene />
+            </SceneMount>
           </section>
           <section id="transformation" className="relative">
-            <TransformationScene />
+            <SceneMount>
+              <TransformationScene />
+            </SceneMount>
           </section>
           <section id="playground" className="relative min-h-screen">
-            <ParticlePlaygroundScene />
+            <SceneMount>
+              <ParticlePlaygroundScene />
+            </SceneMount>
           </section>
           <section id="experiments" className="relative min-h-screen">
-            <GravityScene />
-            <RefractionScene />
-            <KineticScene />
+            <SceneMount>
+              <GravityScene />
+            </SceneMount>
+            <SceneMount>
+              <RefractionScene />
+            </SceneMount>
+            <SceneMount>
+              <KineticScene />
+            </SceneMount>
           </section>
           <section id="final" className="relative min-h-screen">
-            <FinalScene />
+            <SceneMount>
+              <FinalScene />
+            </SceneMount>
           </section>
         </>
       )}
