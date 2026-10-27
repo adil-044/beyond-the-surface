@@ -92,38 +92,43 @@ function AppContent() {
       {!loading && (
         <>
           <section id="hero" className="relative min-h-screen">
-            <SceneMount immediate>
+            <SceneMount
+              immediate
+              staticLabel="001"
+              staticTitle="BEYOND THE SURFACE."
+              staticNote="An exploration of light, matter, motion, and the space between — rendered in 2D while your device can’t run WebGL."
+            >
               <HeroScene />
             </SceneMount>
           </section>
           <section id="materials" className="relative min-h-screen">
-            <SceneMount>
+            <SceneMount staticLabel="002" staticTitle="MATERIALS" staticNote="Physical materials — metal, glass, refraction — in a static study.">
               <MaterialLabScene />
             </SceneMount>
           </section>
           <section id="transformation" className="relative min-h-screen">
-            <SceneMount>
+            <SceneMount staticLabel="003" staticTitle="TRANSFORMATION" staticNote="Objects morphing between states, frozen in time.">
               <TransformationScene />
             </SceneMount>
           </section>
           <section id="playground" className="relative min-h-screen">
-            <SceneMount>
+            <SceneMount staticLabel="004" staticTitle="PLAYGROUND" staticNote="Particles and fields, stilled for the static view.">
               <ParticlePlaygroundScene />
             </SceneMount>
           </section>
           <section id="experiments" className="relative min-h-screen">
-            <SceneMount>
+            <SceneMount staticLabel="005" staticTitle="GRAVITY" staticNote="Force, drag and orbit — in 2D.">
               <GravityScene />
             </SceneMount>
-            <SceneMount>
+            <SceneMount staticLabel="006" staticTitle="REFRACTION" staticNote="A glass study in flat gradients.">
               <RefractionScene />
             </SceneMount>
-            <SceneMount>
+            <SceneMount staticLabel="007" staticTitle="KINETICS" staticNote="Motion study, still.">
               <KineticScene />
             </SceneMount>
           </section>
           <section id="final" className="relative min-h-screen">
-            <SceneMount>
+            <SceneMount staticLabel="008" staticTitle="REPLAY" staticNote="The end of the loop — no GPU needed to feel it.">
               <FinalScene />
             </SceneMount>
           </section>
