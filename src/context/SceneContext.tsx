@@ -62,17 +62,18 @@ export function SceneProvider({ children, reducedMotion = false }: SceneProvider
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    const gl = canvasRef.current.getContext('webgl2', {
-      antialias: true,
-      alpha: true,
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: false,
-      powerPreference: 'high-performance',
-    }) as WebGL2RenderingContext;
+    try {
+      const gl = canvasRef.current.getContext('webgl2', {
+        antialias: true,
+        alpha: true,
+        premultipliedAlpha: false,
+        preserveDrawingBuffer: false,
+        powerPreference: 'high-performance',
+      }) as WebGL2RenderingContext;
 
-    if (!gl) return;
+      if (!gl) return;
 
-    const threeRenderer = new THREE.WebGLRenderer({
+      const threeRenderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       context: gl,
       antialias: true,
@@ -119,6 +120,9 @@ export function SceneProvider({ children, reducedMotion = false }: SceneProvider
       threeRenderer.dispose();
       resources.disposeAll();
     };
+    } catch (error) {
+      console.log('[SceneContext] renderer init skipped (GPU unavailable?):', error);
+    }
   }, [pixelRatio]);
 
   return (

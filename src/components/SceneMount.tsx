@@ -23,7 +23,33 @@ class SceneBoundary extends Component<{ children: ReactNode; fallback?: ReactNod
   }
 
   render() {
-    if (this.state.failed) return this.props.fallback ?? null;
+    if (this.state.failed) {
+      if (this.props.fallback) return this.props.fallback;
+      return (
+        <div
+          className="scene-fallback"
+          style={{
+            minHeight: '60vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            borderRadius: 16,
+            margin: '0 auto',
+            maxWidth: 720,
+          }}
+        >
+          <div>
+            <div className="overline" style={{ color: 'var(--accent)' }}>SIGNAL LOST</div>
+            <p className="text-lg" style={{ color: 'var(--text-secondary)', maxWidth: 480 }}>
+              This scene needs GPU rendering and it’s unavailable here. The rest of the experience remains — scroll on.
+            </p>
+          </div>
+        </div>
+      );
+    }
     return this.props.children;
   }
 }

@@ -91,27 +91,27 @@ function AppContent() {
       {loading && <LoadingScreen progress={progress} />}
       {!loading && (
         <>
-          <section id="hero" className="relative">
+          <section id="hero" className="relative min-h-screen">
             <SceneMount immediate>
               <HeroScene />
             </SceneMount>
           </section>
-          <section id="materials" className="relative">
+          <section id="materials" className="relative min-h-screen">
             <SceneMount>
               <MaterialLabScene />
             </SceneMount>
           </section>
-          <section id="transformation" className="relative">
+          <section id="transformation" className="relative min-h-screen">
             <SceneMount>
               <TransformationScene />
             </SceneMount>
           </section>
-          <section id="playground" className="relative">
+          <section id="playground" className="relative min-h-screen">
             <SceneMount>
               <ParticlePlaygroundScene />
             </SceneMount>
           </section>
-          <section id="experiments" className="relative">
+          <section id="experiments" className="relative min-h-screen">
             <SceneMount>
               <GravityScene />
             </SceneMount>
@@ -122,7 +122,7 @@ function AppContent() {
               <KineticScene />
             </SceneMount>
           </section>
-          <section id="final" className="relative">
+          <section id="final" className="relative min-h-screen">
             <SceneMount>
               <FinalScene />
             </SceneMount>
