@@ -37,7 +37,7 @@ function AppContent() {
     <>
       <Navigation />
       <CustomCursor />
-      <LoadingScreen progress={progress} onComplete={() => setLoading(false)} />
+      {loading && <LoadingScreen progress={progress} onComplete={() => setLoading(false)} />}
       {!loading && (
         <>
           <section id="hero" className="relative min-h-screen">
