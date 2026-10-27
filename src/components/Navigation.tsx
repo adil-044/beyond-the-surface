@@ -22,29 +22,42 @@ export function Navigation() {
   }, [reducedMotion, prefersReduced]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '-50% 0px -50% 0px',
-        threshold: 0,
-      }
-    );
+    let observer: IntersectionObserver | null = null;
 
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    const attach = () => {
+      const missing = sections.filter(({ id }) => !document.getElementById(id));
+      if (missing.length > 0) return; // content not mounted yet (loading screen up)
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(entry.target.id);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: '-50% 0px -50% 0px',
+          threshold: 0,
+        }
+      );
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el) observer!.observe(el);
+      });
+    };
 
-    return () => observer.disconnect();
+    attach();
+    const mo = new MutationObserver(attach);
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      mo.disconnect();
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   const scrollToSection = (id: string) => {

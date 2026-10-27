@@ -70,7 +70,7 @@ export function SceneMount({
   }, [immediate, rootMargin]);
 
   return (
-    <div ref={ref} style={{ minHeight: 'inherit' }}>
+    <div ref={ref} className="scene-mount" style={{ minHeight: 'inherit' }}>
       <SceneBoundary fallback={fallback}>{active ? children : null}</SceneBoundary>
     </div>
   );

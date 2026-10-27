@@ -3,20 +3,14 @@ import { motion } from 'framer-motion';
 
 interface LoadingScreenProps {
   progress: number;
-  onComplete: () => void;
 }
 
-export function LoadingScreen({ progress, onComplete }: LoadingScreenProps) {
+export function LoadingScreen({ progress }: LoadingScreenProps) {
   const [showProgress, setShowProgress] = useState(false);
 
   useEffect(() => {
     if (progress > 0) setShowProgress(true);
-    if (progress >= 1) {
-      setTimeout(() => {
-        onComplete();
-      }, 800);
-    }
-  }, [progress, onComplete]);
+  }, [progress]);
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center" style={{ background: 'var(--bg)' }}>

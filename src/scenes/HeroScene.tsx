@@ -1,8 +1,7 @@
-import { useRef, useEffect, useState, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { useScene } from '../context/SceneContext';
-import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
 import { TechnicalLabel } from '../components/UIComponents';
 import { seededRandom } from '../utils/geometry';
@@ -132,24 +131,6 @@ function EnvironmentMap({ envMap }: { envMap: THREE.Texture }) {
 }
 
 export function HeroScene() {
-  const [showContent] = useState(false);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.5 });
-
-    tl.to('.hero-content', {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      ease: 'power3.out',
-      stagger: 0.15,
-    });
-
-    return () => {
-      tl.kill();
-    };
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center">
       <div className="canvas-container">
@@ -164,7 +145,7 @@ export function HeroScene() {
         </Canvas>
       </div>
 
-      <div className="section-content hero-content" style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+      <div className="section-content hero-content">
         <div className="max-w-[1440px] mx-auto px-6 h-full flex flex-col items-center justify-center text-center">
           <div className="mb-12 flex flex-col items-center gap-4">
             <span className="overline" style={{ color: 'var(--accent)' }}>INTERACTIVE EXPERIMENT No. 001</span>
