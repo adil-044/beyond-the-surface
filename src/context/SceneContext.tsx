@@ -142,7 +142,11 @@ export function SceneProvider({ children, reducedMotion = false }: SceneProvider
         getScene,
       }}
     >
-      <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block', touchAction: 'none' }} />
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', pointerEvents: 'none' }}
+      />
       {children}
     </SceneContext.Provider>
   );
